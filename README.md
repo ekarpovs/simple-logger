@@ -1,4 +1,4 @@
-## Simple Email Client
+## Simple Logger
 
 A simple logger for Nodejs applications.
 

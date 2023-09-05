@@ -26,8 +26,9 @@ from the root directory of you project run the command:
 ```
 ### Usage
 ```
-import { LoggerOptions, initLogger, level } from '';
+import { LoggerOptions, initLogger, level } from '@ekarpovs/simple-logger';
 
+// Initialization
 const cfg: LoggerOptions = {
   loggerFileLocation: "logs/log.json",
   loggerFileMaxSize: "20m",
@@ -39,5 +40,6 @@ const cfg: LoggerOptions = {
 
 const logger = initLogger(cfg);
 
+// Usage
 logger.info("Test Info logger");
 ```

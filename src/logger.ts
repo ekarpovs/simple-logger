@@ -3,13 +3,6 @@ import "winston-daily-rotate-file";
 
 const { timestamp, combine, errors, json } = format;
 
-// const loggerFileLocation = process.env.SIMPLE_LOGGER_FILE_LOCATION || "logs/log.json";
-// const loggerFileMaxSize = process.env.SIMPLE_LOGGER_FILE_MAX_SIZE || "20m";
-// const loggerDatePattern = process.env.SIMPLE_LOGGER_FILE_DATE_PATTERN || "yyyy-MM-dd.";
-// const loggerMaxFiles = process.env.SIMPLE_LOGGER_MAX_FILES || "14d";
-// const loggerZippedArchive = Boolean(process.env.SIMPLE_LOGGER_ZIPPED_ARCHIVE || "false");
-// const loggerLevel = process.env.SIMPLE_LOGGER_LEVEL || "http";
-
 export enum level{
   error = 'error',
   warn = 'warn',
@@ -54,6 +47,5 @@ export const initLogger = (cfg: LoggerOptions): Logger => {
     transports: logTransports,
     level: cfg.loggerLevel,
   });
-
 };
 

@@ -89,7 +89,6 @@
   "dependencies": {
     "@types/morgan": "^1.9.5",
     "fs": "^0.0.1-security",
-    "morgan": "^1.10.0",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"
   }

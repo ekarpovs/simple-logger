@@ -11,7 +11,7 @@ describe("Simple Logger E2E test", () => {
       loggerFileMaxSize: "20m",
       loggerDatePattern: "yyyy-MM-dd.",
       loggerMaxFiles: "14d",
-      loggerZippedArchive: true,
+      loggerZippedArchive: "true",
       loggerLevel: level.http,   
     };
     

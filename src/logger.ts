@@ -18,8 +18,8 @@ export type LoggerOptions = {
   loggerFileMaxSize: string;
   loggerDatePattern: string;
   loggerMaxFiles: string;
-  loggerZippedArchive: boolean;
-  loggerLevel: level;
+  loggerZippedArchive: string;
+  loggerLevel: string;
 };
 
 export const initLogger = (cfg: LoggerOptions): Logger => {
@@ -35,7 +35,7 @@ export const initLogger = (cfg: LoggerOptions): Logger => {
     new(transports.DailyRotateFile)({
       filename: cfg.loggerFileLocation,
       datePattern: cfg.loggerDatePattern,
-      zippedArchive: cfg.loggerZippedArchive,
+      zippedArchive: toBoolean(cfg.loggerZippedArchive),
       maxSize: cfg.loggerFileMaxSize,
       maxFiles: cfg.loggerMaxFiles,
       format: format.combine(format.json()),
@@ -49,3 +49,6 @@ export const initLogger = (cfg: LoggerOptions): Logger => {
   });
 };
 
+const toBoolean = (dataStr: string): boolean => {
+  return !!(dataStr?.toLowerCase?.() === 'true');
+};

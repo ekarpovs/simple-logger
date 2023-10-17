@@ -27,9 +27,10 @@
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint src/**/*.ts --fix",
     "test": "jest --detectOpenHandles --coverage --verbose",
-    "rename": "./node_modules/move-file-cli/cli.js README.md gitREADME.md",
     "prepack": "npm run build",
-    "pack:local": "npm run rename&& npm run build && npm pack",
+    "rename": "./node_modules/move-file-cli/cli.js README.md gitREADME.md",
+    "rename:back": "./node_modules/move-file-cli/cli.js gitREADME.md README.md",
+    "pack:local": "npm run rename&& npm run build && npm pack && npm run rename:back",
     "prepare": "husky install",
     "semantic-release": "semantic-release --branches main",
     "commit": "git-cz"
@@ -66,7 +67,6 @@
     "@babel/preset-env": "^7.22.10",
     "@babel/preset-typescript": "^7.22.5",
     "@types/jest": "^29.5.4",
-    "@types/nodemailer": "^6.4.9",
     "@typescript-eslint/eslint-plugin": "^6.4.1",
     "@typescript-eslint/parser": "^6.4.1",
     "cz-conventional-changelog": "^3.3.0",
@@ -87,7 +87,6 @@
     }
   },
   "dependencies": {
-    "@types/morgan": "^1.9.5",
     "fs": "^0.0.1-security",
     "winston": "^3.10.0",
     "winston-daily-rotate-file": "^4.7.1"

@@ -1,6 +1,6 @@
 import {describe, test} from '@jest/globals';
 
-import { LoggerOptions, initLogger, level } from '../';
+import { LoggerOptions, initLogger, level } from '../src';
 
 describe("Simple Logger E2E test", () => {
 

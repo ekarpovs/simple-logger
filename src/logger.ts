@@ -3,7 +3,12 @@ import "winston-daily-rotate-file";
 
 const { timestamp, combine, errors, json } = format;
 
-export enum level{
+export enum transport {
+  console = 0,
+  rotated = 1,
+};
+
+export enum level {
   error = 'error',
   warn = 'warn',
   info = 'info',
@@ -11,7 +16,7 @@ export enum level{
   verbose = 'verbose',
   debug = 'debug',
   silly = 'silly',
-}
+};
 
 export type LoggerOptions = {
   loggerFileLocation: string;
@@ -20,6 +25,7 @@ export type LoggerOptions = {
   loggerMaxFiles: string;
   loggerZippedArchive: string;
   loggerLevel: string;
+  loggerTransport?: transport;
 };
 
 export const initLogger = (cfg: LoggerOptions): Logger => {
@@ -28,7 +34,7 @@ export const initLogger = (cfg: LoggerOptions): Logger => {
       format: format.combine(
         format.colorize(),
         format.printf(({ timestamp, level, message }) => {
-          return `[${timestamp}] ${level}: ${message}}`;
+          return `[${timestamp}] ${level}: ${message}`;
         })
       ),
     }),
@@ -42,11 +48,14 @@ export const initLogger = (cfg: LoggerOptions): Logger => {
     }),
   ];
   
-  return createLogger({
+  const logger = createLogger({
     format: combine(timestamp(), errors({ stack: true }), json()),
-    transports: logTransports,
     level: cfg.loggerLevel,
   });
+
+  logger.add(logTransports[cfg.loggerTransport || transport.console]);
+
+  return logger;
 };
 
 const toBoolean = (dataStr: string): boolean => {

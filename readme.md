@@ -23,7 +23,7 @@ A simple logger for Nodejs applications.
 ```
 ### Usage
 ```
-import { LoggerOptions, initLogger, level } from '@ekarpovs/simple-logger';
+import { LoggerOptions, initLogger, level, transport } from '@ekarpovs/simple-logger';
 
 // Initialization
 const cfg: LoggerOptions = {
@@ -33,6 +33,7 @@ const cfg: LoggerOptions = {
   loggerMaxFiles: "14d",
   loggerZippedArchive: true,
   loggerLevel: level.http,   
+  loggerTransport?: transport.rotated
 };
 
 const logger = initLogger(cfg);

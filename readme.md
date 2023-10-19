@@ -23,20 +23,43 @@ A simple logger for Nodejs applications.
 ```
 ### Usage
 ```
-import { LoggerOptions, initLogger, level, transport } from '@ekarpovs/simple-logger';
 
-// Initialization
-const cfg: LoggerOptions = {
-  loggerFileLocation: "logs/log.json",
-  loggerFileMaxSize: "20m",
-  loggerDatePattern: "yyyy-MM-dd.",
-  loggerMaxFiles: "14d",
-  loggerZippedArchive: true,
-  loggerLevel: level.http,   
-  loggerTransport?: transport.rotated
+import { initLogger, level, LoggerOptions, loggerOptionsRotated } from '@ekarpovs/simple-logger';
+
+// Possible cases of the logger initialization:
+// 1. Logging to the console:
+const loggerConfig: LoggerOptions = {
+  loggerService: <your-app-name>,
+  loggerLevel: level.http,
 };
 
-const logger = initLogger(cfg);
+// 2. Logging to a stream (file for example):
+const wrStream = createWriteStream(<path and log file name>);
+const logStream: loggerOptionsStream = {
+  stream: wrStream,
+};
+const loggerConfig: LoggerOptions = {
+  loggerService: <your-app-name>,
+  loggerLevel: level.http,
+  loggerOptionsRotated: logStream,
+};
+
+// 2. Logging to a local rotated file:
+const logRotated: loggerOptionsRotated = {
+  fullFilename: <path and log files prefix  name>,
+  datePattern: <date pattern>,
+  fileMaxSize: <max file size>,
+  maxFiles: <max number of the log files>,
+  zippedArchive: "true/false",
+};
+
+const loggerConfig: LoggerOptions = {
+  loggerService: <your-app-name>,
+  loggerLevel: level.http,
+  loggerOptionsRotated: logRotated,
+};
+
+const logger = initLogger(loggerConfig);
 
 // Usage
 logger.info("Test Info logger");
